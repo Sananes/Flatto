@@ -1,0 +1,87 @@
+ {{ 'foundation.min.js' | asset_url | script_tag }} 
+  
+    <script>
+ $(document).foundation();
+  $("#searchform").foundation('reveal', {
+        animation: 'fadeAndPop',
+        animationSpeed: 250,
+        closeOnBackgroundClick: true,
+        dismissModalClass: 'close-reveal-modal',
+        bgClass: 'reveal-modal-bg',
+        open: function(){
+
+        },
+        opened: function(){
+          $(this).find("input").focus();
+        },
+        close: function(){},
+        closed: function(){},
+        bg : $('.reveal-modal-bg'),
+        css : {
+          open : {
+            'opacity': 0,
+            'visibility': 'visible',
+            'display' : 'block'
+          },
+          close : {
+            'opacity': 1,
+            'visibility': 'hidden',
+            'display': 'none'
+          }
+        }
+});
+
+$(document).ready( function($) {
+  $('.quick-shop').fancybox({
+    width: '860px',
+    scrolling: false,
+    height: 'auto',
+    autoSize: false,
+    title: false,
+        tpl: {
+              wrap : '<div class="quick-shop-wrapper fancybox-wrap"><div class="fancybox-skin"><div class="fancybox-outer"><div class="fancybox-inner"></div></div></div></div>'
+        }
+  });
+  //$('#product-image').enhanceGallery();
+ // The slider being synced must be initialized first
+
+});
+
+// Can also be used with $(document).ready()
+$(window).load(function() {
+  $('.flexslider').flexslider({
+    animation: "fade",
+    controlNav: "thumbnails"
+  });
+  $('.quick-shop-flex').flexslider({
+    animation: "fade",
+    controlNav: "thumbnails",
+    directionNav: false,
+    animationLoop: false
+  });
+});
+    </script>
+
+    <!-- Let's add a product zoom becaue Foundation doesn't have one. Thank's to Jack Moore! 
+    {{ 'jquery.zoom.js' | asset_url | script_tag }}
+    {{ 'jquery.swipe.js' | asset_url | script_tag }}
+    {{ 'jquery.offcanvas.js' | asset_url | script_tag }}-->
+
+<script>
+$(document).ready( function() {
+  var product = $('.product-item figure'),
+      productFigure = product.find('figure'),
+      overlay = product.find('.overlay');
+
+      product.each( function() {
+      $(this).hover( function() {
+              $(this).addClass('hover');
+            }, function() {
+              $(this).removeClass('hover');
+            });
+
+      });
+
+
+});
+</script>

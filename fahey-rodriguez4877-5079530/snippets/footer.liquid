@@ -1,0 +1,98 @@
+{% if settings.footer_widgets_on %}
+	<!-- Widgets -->
+		{% include 'footer-widgets' %}
+	<!-- End Widgets -->
+{% endif %}
+
+<footer class="row">
+<div id="footer-blocks" class="large-12 columns">
+	<div class="row">
+		{% if settings.fw_mc_inc %}
+		<div class="newsletter large-3 columns">
+			<div class="panel">
+				{%if settings.fw_mc_title != '' %}<h5>{{ settings.fw_mc_title }}</h5>{% endif %}
+				<form action="{{ settings.fw_mc_form_id }}" name="mc-embedded-subscribe-form" class="contact-form" target="_blank">
+          <input type="email" value="" name="EMAIL" class="required email" id="contact_email" placeholder="Enter your email address...">
+          <input type="submit" value="Sign Up"  class="button" id="sign_up" name="subscribe" class="action_button">
+        </form>
+ 				 {%if settings.fw_mc_title != '' %}
+ 				 	<p>{{ settings.fw_mc_dec }}</p>
+ 				 {% endif %}
+			</div>
+			</div>
+			{% endif %}
+
+		{%if settings.fw_about_dec != '' || settings.fw_about_title != '' %}
+		<div class="about-us large-3 columns">
+			<div class="panel">
+				<h5>About StoreWatch</h5>
+ 				 {%if settings.fw_about_dec != '' %}
+ 				 	<p>{{ settings.fw_about_dec }}</p>
+ 				 {% endif %}
+			</div>
+		</div>
+	 {% endif %}
+		 {% if settings.fw_support_links %}
+		<div class="support-links large-3 columns">
+			<div class="panel">
+				<h5>Support Links</h5>
+						<ul>
+						{% for link in linklists.support-menu.links %}
+	
+	          <li class="{% if forloop.first %}first{% elsif forloop.last %}last{%endif%}">
+	            {% assign child_list_handle = link.title | handleize %}
+	            {% if linklists[child_list_handle].links != blank %}
+	            <li class="{% if link.active %}active{% endif %} has-dropdown not-click">
+	              <a href="{{ link.url }}" class="clearfix">
+	                <span class="nav-label">{{ link.title | escape }}</span>
+	                	<i class="fi-arrow-down"></i>
+	              </a>
+										<i class="fi-arrow-down"></i>
+	              <ul class="dropdown">
+	                {% for childlink in linklists[child_list_handle].links %}
+	                <li{% if childlink.active %} class="active active-submenu"{% endif %}><a href="{{ childlink.url }}">{{ childlink.title | escape }}</a></li>
+	                {% endfor %}
+	              </ul>
+	            </li>
+	            {% else %}
+	              <a href="{{ link.url }}">{{ link.title | escape }}</a>
+	            {% endif %}
+	          </li>
+	        
+				{% endfor %}
+			  </ul>
+			</div>
+		</div>
+		{% endif %}
+
+
+
+		{% if settings.fw_social_links %}
+		<div class="social large-3 columns">
+			<div class="panel">
+				<h5>Follow Us</h5>
+				<ul>
+					{% if settings.fw_twitter_link != '' %}<li><a href="{{ settings.fw_twitter_link }}"><i class="fi-social-twitter"></i></li>{% endif %}
+					{% if settings.fw_fb_link != '' %}<li><a href="{{ settings.fw_fb_link }}"><i class="fi-social-facebook"></i></li>{% endif %}
+					{% if settings.fw_youtube_link != '' %}<li><a href="{{ settings.fw_youtube_link }}"><i class="fi-social-youtube"></i></li>{% endif %}
+					{% if settings.fw_twitter_link != '' %}<li><a href="{{ settings.fw_twitter_link }}"><i class="fi-social-twitter"></i></li>{% endif %}
+					{% if settings.fw_twitter_link != '' %}<li><a href="{{ settings.fw_twitter_link }}"><i class="fi-social-twitter"></i></li>{% endif %}
+					{% if settings.fw_twitter_link != '' %}<li><a href="{{ settings.fw_twitter_link }}"><i class="fi-social-twitter"></i></li>{% endif %}
+				</ul>
+			</div>
+		</div>
+		{% endif %}
+	</div>
+</div>
+	<div class="large-12 columns">
+		<hr>
+		<div class="row">
+			<div class="large-6 columns">
+				<p><a href="http://sananes.co">Foundation Theme</a> Built by <a href="http://sananes.co">Aaron Sananes</a></p>
+			</div>
+			<div class="large-6 columns">
+				<p align="right">&copy; Copyright {{ "now" | date: "%Y" }} {{ shop.name }}. {{ powered_by_link }}</p>
+			</div>
+		</div>
+	</div>
+</footer>

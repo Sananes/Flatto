@@ -1,0 +1,212 @@
+
+    <div class="small-12 columns">
+        <ul class="breadcrumbs">
+            <li><a href="/">Home</a></li>
+            <li><a href="/collections/">Collections</a>
+            <li>{{ product.type | link_to_type }}</li>
+        </ul>
+    </div>
+</div>
+
+<div class="row">
+    <form action="/cart/add" method="post">
+
+     <div class="small-12 large-6 columns">
+      {% if product.images.size == 1 %}
+          <img src="{{ product.featured_image | product_img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}" />
+
+      {% else %}
+      <div id="slider" class="flexslider">
+            <ul id="slides" class="slides">
+                {% for image in product.images %}                
+                    <li data-thumb="{{ image | product_img_url: 'grande' }}"><a class="fancybox" href="{{ image | product_img_url: 'grande' }}" rel="group"><img src="{{ image | product_img_url: 'grande' }}" alt="{{ product.title | escape }}"></a></li>
+                {% endfor %}        
+            </ul>
+                </div>
+        {% endif %}
+
+      </div>
+
+        <div class="small-12 large-6 columns">
+              <h5 class="subheader capitalized">{{ product.vendor | link_to_vendor  }}</h5>          
+            <h3>{{ product.title }}</h3>
+
+
+            <div id="product-price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+        <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
+        {% if product.available %}
+        <link itemprop="availability" href="http://schema.org/InStock" />
+        {% else %}
+        <link itemprop="availability" href="http://schema.org/OutOfStock" />
+        {% endif %}
+        <h5>
+          {% if product.compare_at_price > product.price %}
+          <span class="price" itemprop="price">{{ product.price | money }}</span>&nbsp;<s class="sale-price">{{ product.compare_at_price_max | money }}</s>
+          {% else %}
+          <span class="price" itemprop="price">{{ product.price | money }}</span>
+          {% endif %}
+        </h5>
+    </div>
+    
+            <hr>
+        {% if product.available %}
+          {% assign hide_default_title = false %}
+    {% if product.variants.size == 1 and product.variants.first.title contains 'Default' %}
+      {% assign hide_default_title = true %}
+
+
+    {% endif %}       
+
+
+
+    <div id="product-variants" class="{% if hide_default_title %} hidden{% endif %}">
+      <select id="product-select" name="id" class="hidden">
+      {% for variant in product.variants %}
+        <option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
+      {% endfor %}
+      </select>
+              {% if settings.display_quantity_dropdown %}
+          <div class="selector-wrapper">
+            <label>Quantity</label>
+            <input id="quantity" type="number" class="qty" name="quantity" value="1"  min="1"/>
+          </div>
+          {% endif %} 
+    </div>  
+      <div class="selector-wrapper">
+          {% if product.variants.size != 1 %}
+            <label style="width:48px;"></label>      
+          {% endif %}
+            <button class="button" type="submit"><i class="icon-shopping-cart"></i> Add to cart</button>
+      </div>
+            {% else %}
+                <p>Sorry, the product is not available.</p>
+            {% endif %}
+
+            <h5>Description</h5>
+
+            <p>{{ product.description }}</p>
+            <div id="share">
+            <ul>
+              <li><div id="fb-root"></div>
+              <script>(function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=444979425585208";
+                fjs.parentNode.insertBefore(js, fjs);
+              }(document, 'script', 'facebook-jssdk'));</script>
+              <div class="fb-like" data-href="{{url}}" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div></li>
+              <li><a href="https://twitter.com/share" class="twitter-share-button" data-url="{{url}}" data-lang="en">Tweet</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li>
+              <!-- Place this tag where you want the +1 button to render. -->
+              <li><div class="g-plusone" data-size="medium"></div>
+
+              <!-- Place this tag after the last +1 button tag. -->
+              <script type="text/javascript">
+                (function() {
+                  var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                  po.src = 'https://apis.google.com/js/plusone.js';
+                  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                })();
+              </script></li>
+              <li><a href="http://www.pinterest.com/pin/create/button/
+                  ?url={{url}}
+                  &media={{ product.featured_image | product_img_url: 'medium' }}
+                  &description={{product.description}}"
+                  data-pin-do="buttonPin"
+                  data-pin-config="above">
+                  <img src="//assets.pinterest.com/images/pidgets/pin_it_button.png" />
+              </a>
+              <script type="text/javascript">
+              (function(d){
+                  var f = d.getElementsByTagName('SCRIPT')[0], p = d.createElement('SCRIPT');
+                  p.type = 'text/javascript';
+                  p.async = true;
+                  p.src = '//assets.pinterest.com/js/pinit.js';
+                  f.parentNode.insertBefore(p, f);
+              }(document));
+              </script>
+              </li>
+              </ul>
+
+            </div>
+        </div>
+
+    </form>
+
+    </div>
+
+      {% include 'related-products' %} 
+
+            
+<script>
+jQuery(document).ready( function($){
+    $('.fancybox').fancybox({
+      beforeClose: function() {
+        $('#thumbs li a').removeClass('fancybox');
+      }
+    });
+
+});
+jQuery(function($) {
+
+  var selectCallback = function(variant, selector) {
+
+    if (variant) {
+      
+      if (variant.available) {
+        
+        // Selected a valid variant that is available.
+        $('#add').removeClass('disabled').removeAttr('disabled').val('Add to Cart').fadeTo(200,1);
+      
+        // If item is backordered yet can still be ordered, we'll show special message.
+        if (variant.inventory_management && variant.inventory_quantity <= 0) {
+          $('#selected-variant').html({{ product.title | json }}{% unless hide_default_title %} + ' - ' + variant.title{% endunless %});
+          $('#backorder').removeClass("hidden");
+        } else {
+          $('#backorder').addClass("hidden");
+        }
+        
+      } else {
+        // Variant is sold out.
+        $('#backorder').addClass('hidden');
+        $('#add').val('Sold Out').addClass('disabled').attr('disabled', 'disabled').fadeTo(200,0.5);        
+      }
+      
+      // Whether the variant is in stock or not, we can update the price and compare at price.
+      if ( variant.compare_at_price > variant.price ) {
+        $('#price').html('<span class="price sale-price">'+ Shopify.formatMoney(variant.price, "{{ shop.money_format }}") +'</span>'+'&nbsp;<s class="product-compare-price">'+Shopify.formatMoney(variant.compare_at_price, "{{ shop.money_format }}")+ '</s>');
+      } else {
+        $('#price').html('<span class="price">'+ Shopify.formatMoney(variant.price, "{{ shop.money_format }}") + '</span>' );
+      }        
+
+    } else {
+      // variant doesn't exist.
+      $('#backorder').addClass('hidden');
+      $('#add').val('Unavailable').addClass('disabled').attr('disabled', 'disabled').fadeTo(200,0.5);
+    }
+
+  };
+
+  new Shopify.OptionSelectors('product-select', { product: {{ product | json }}, onVariantSelected: selectCallback });
+  
+  // Add label if only one product option and it isn't 'Title'.
+  {% if product.options.size == 1 and product.options.first != 'Title' %}
+    $('.selector-wrapper:eq(0)').prepend('<label>{{ product.options.first }}</label>');
+  {% endif %}
+  
+  // Auto-select first available variant on page load.
+  {% assign found_one_in_stock = false %}
+  {% for variant in product.variants %}
+    {% if variant.available and found_one_in_stock == false %}
+      {% assign found_one_in_stock = true %}
+      {% for option in product.options %}
+      $('.single-option-selector:eq({{ forloop.index0 }})').val({{ variant.options[forloop.index0] | json }}).trigger('change');
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+
+});
+
+</script>    
+            

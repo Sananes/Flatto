@@ -1,0 +1,80 @@
+<!-- Sidebar Mobile -->
+
+<section id="sidebar" role="complementary">
+				<nav id="sideMenu" role="navigation">
+   
+						  <ul id="sideMainNav" class="nav-bar">
+						          {% for link in linklists.main-menu.links %}
+						          <li class="{% if forloop.first %}first{% elsif forloop.last %}last{%endif%}">
+						            {% assign child_list_handle = link.title | handleize %}
+						            {% if linklists[child_list_handle].links != blank %}
+						            <li class="{% if link.active %}active{% endif %} has-dropdown not-click">
+						              <a href="{{ link.url }}" class="clearfix">
+						                <span class="nav-label">{{ link.title | escape }}</span>
+						                	<i class="fi-arrow-down"></i>
+						              </a>
+															<i class="fi-arrow-down"></i>
+						              <ul class="dropdown">
+						                {% for childlink in linklists[child_list_handle].links %}
+						                <li{% if childlink.active %} class="active active-submenu"{% endif %}><a href="{{ childlink.url }}">{{ childlink.title | escape }}</a></li>
+						                {% endfor %}
+						              </ul>
+						            </li>
+						            {% else %}
+						              <a href="{{ link.url }}">{{ link.title | escape }}</a>
+						            {% endif %}
+						          </li>
+						          {% endfor %}
+						        </ul>
+							
+									<ul id="mobile-cart-menu">
+
+										<li>
+											<a href="/cart"><i class="fi-shopping-cart white"></i> {{ cart.item_count }} {{ cart.item_count | pluralize: 'item', 'items' }} ({{ cart.total_price | money }})</a>
+										</li>
+										{% if cart.item_count > 0 %}
+											<li class="has-form checkout">
+												<a class="small button" href="/checkout"><i class="fi-credit-card white"></i> Check Out</a>
+											</li>
+										{% endif %} 
+									</ul>
+										<!-- You can use the next li to add a checkout button if you like 
+									<ul id="mobile-search">
+										<li class="has-form search-textarea">
+											<form action="/search" method="get" class="search-form" role="search">
+											<input name="q" type="text" id="search-field" placeholder="Search store..." class="hint" />
+										</li>
+										<li class="has-form search-submit">
+											<input class="small button" type="submit" id="search-submit" value="Search" /></form>
+										</li>
+
+
+    			</ul>--> 
+
+    			{% if shop.customer_accounts_enabled %}
+			  {% if customer %}
+			  <ul id="mobile-account-menu">
+			  	<li class="account has-dropdown"><a href="/account">
+			  	{% if settings.fw_gravatar_email %}
+			  		<img src="http://www.gravatar.com/avatar/{{ customer.email | remove: ' ' | strip_newlines | downcase | md5 }}?s=560" class="block float-left" title="{{ customer.email }}"  style="width:28px; height:28px; "/>
+			  	{% else %}
+						<img src="http://www.gravatar.com/avatar/?s=560"  style="width:28px; height:28px; " />
+			  	{% endif %}
+			    {{ customer.name }}</a> 
+						<ul class="dropdown">
+						                   <li>{{ 'Log out' | customer_logout_link }}</li>
+						                </ul>
+					</li>
+
+			  {% else %}
+			    <li>{{ 'Log in' | customer_login_link }}</li>
+			    {% if shop.customer_accounts_optional %}
+			     <li> {{ 'Create an account' | customer_register_link }}</li>
+			    {% endif %}
+			  {% endif %}
+			{% endif %}
+    		</nav>
+  		</section>
+<!-- End Sidebar Mobile -->
+
+<div class="canvas-overlay"> </div>

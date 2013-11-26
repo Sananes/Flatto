@@ -1,0 +1,124 @@
+
+
+<!-- Top Nav -->
+	{% include 'top-navigation' %}
+<!-- End Top Nav -->
+
+
+<!-- Top Nav Bar -->
+<div id="main-header">
+	<nav class="top-bar contain-to-grid">
+			<ul class="title-area">
+				<li class="name">
+					<h1><a href="/"><i class="fi-home"></i> {{ shop.name }}</a></h1>
+				</li>
+			</ul>
+      <ul  id="headerSearch" class="right">
+        <li class="has-form">
+          <form action="/search" method="get" role="search">
+           <input name="q" type="text" id="search-field" placeholder="Search store..." class="hint" />
+          </form>
+        </li>
+        </ul>    
+		<section class="top-bar-section">
+       <ul id="nav">
+          {% for link in linklists.main-menu.links %}
+          <li class="{% if forloop.first %}first{% elsif forloop.last %}last{%endif%}">
+            {% assign child_list_handle = link.title | handleize %}
+            {% if linklists[child_list_handle].links != blank %}
+            <li class="has-dropdown not-click">
+              <a href="{{ link.url }}" class="clearfix">
+                <span class="nav-label">{{ link.title | escape }}</span>
+                <span class="nav-arrow"></span>
+              </a>
+              <ul class="dropdown">
+                {% for childlink in linklists[child_list_handle].links %}
+                <li><a href="{{ childlink.url }}">{{ childlink.title | escape }}</a></li>
+                {% endfor %}
+              </ul>
+            </li>
+            {% else %}
+              <a href="{{ link.url }}">{{ link.title | escape }}</a>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+       
+			<ul id="cart" class="right"> 
+          <li class="search">
+            <a href="#" data-reveal-id="searchform"><i class="fi-magnifying-glass"></i> <span>Search</span></a>
+          </li>
+				<li class="has-dropdown">
+					<a href="/cart"><i class="fi-shopping-cart white"></i> {{ cart.item_count }} {{ cart.item_count | pluralize: 'item', 'items' }} ({{ cart.total_price | money }})</a>
+         {% if cart.item_count > 0 %}
+         <ul class="dropdown  mini-cart">
+          {% for item in cart.items %}  
+            <li>
+              <a href="{{ item.product.url | within: collections.all }}">  
+                <img src="{{ item.product.featured_image.src | product_img_url: 'small' }}" alt="{{ item.title | escape }}" />
+              </a>
+
+              {{ item.title }} 
+                  
+                  <span class="price"> {{ item.price | money }}<span>
+                  </a></h3></li>
+          {% endfor %}
+          <li class="has-form">
+            <div class="checkout">
+              <a class="small button" href="/checkout"><i class="fi-credit-card white"></i> Check Out</a>
+            </div>
+          </li>
+        </ul>
+        {% endif %} 
+				</li>
+
+
+				{% if shop.customer_accounts_enabled %}
+        {% if customer %}
+        <ul>
+          <li class="account has-dropdown"><a href="/account">
+          {% if settings.fw_gravatar_email %}
+            <img src="http://www.gravatar.com/avatar/{{ customer.email | remove: ' ' | strip_newlines | downcase | md5 }}?s=560" class="block float-left" title="{{ customer.email }}"  style="width:28px; height:28px; "/>
+          {% else %}
+            <img src="http://www.gravatar.com/avatar/?s=560"  style="width:28px; height:28px; " />
+          {% endif %}
+          {{ customer.name }}</a> 
+            <ul class="dropdown">
+            <li class="title back js-generated"><h5><a href="#">Back</a></h5></li>
+              <li class=""><a href="http://patterntap.com">Pattern Tap</a></li>
+              <li class=""><a href="http://www.zurb.com/word">Word</a></li>
+              <li class=""><a href="http://www.zurb.com/responsive">Responsive</a></li>
+              <li class=""><a href="http://www.zurb.com/playground">Playground</a></li>
+               <li>{{ 'Log out' | customer_logout_link }}</li>
+            </ul>
+          </li>
+
+        {% else %}
+          <li class="last">{{ 'Log in' | customer_login_link }}</li>
+          {% if shop.customer_accounts_optional %}
+           <li class="last"> {{ 'Create an account' | customer_register_link }}</li>
+          {% endif %}
+        {% endif %}
+        </ul>
+      {% endif %}
+			</ul>
+	
+	</section>
+
+	</nav>
+  </div>
+	<!-- End Top Nav Bar -->
+
+	<!-- // This is the search form, with a cool popup -->
+	<!-- Search Form -->
+
+	<div id="searchform" class="reveal-modal medium">
+		<form action="/search" method="get" id="search-form" role="search">
+				<input name="q" type="text" id="search-field" placeholder="Search store..." class="hint" />
+		</form>
+		  <a class="close-reveal-modal">&#215;</a>
+	</div>
+	<div class="reveal-white-bg reveal-modal-bg" style="display: none"></div>
+
+	<!-- End Search Form -->
+

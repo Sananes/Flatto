@@ -1,0 +1,312 @@
+/**
+ * @author Aaron Sananes <http://www.sananes.co>
+ * @copyright Copyright (c) 2013 Sananes LLC
+ * @license MIT
+ * @version 1.0
+ */
+
+// IMPORTS
+@import 'foundation.scss';
+
+/* THEME GLOBAL VARIABLES
+ * ------------------------------------------------ */
+$mobile_height: 40px;
+$mobile_nav_bg: #ddd;
+
+/* BODY
+ * ------------------------------------------------ */
+
+  body {
+  }
+
+/* REUSABLE CLASSES
+ * ------------------------------------------------ */
+.clear-header {
+  margin-top:$topbar-height;
+}
+.center-column {
+  float:none;
+  margin-left:auto;
+  margin-right: auto;
+}
+.hidden {
+  display:none;
+}
+
+/* MAIN CONTENT
+ * ------------------------------------------------ */
+#main-content {
+  padding:40px 0;
+  @extend .clear-header;
+}
+
+/* HEADER
+ * ------------------------------------------------ */
+#main-header {
+      @include single-transition(all);
+      @extend .fixed;
+      #headerSearch {
+        display:none;
+        padding-right:25px;
+        li { line-height: $topbar-height; }
+        form { display:inline-block; }
+      }
+      .top-bar .name h1 a {
+        padding-left:20px;
+      }
+}
+#header {
+  line-height:$topbar-height;
+  height:$topbar-height;
+  color: #fff;
+  .row { max-width: 100% !important; }
+  .inner {
+   padding: 0 20px; 
+  line-height:$topbar-height;
+  height:$topbar-height;
+  border-bottom:1px solid #ddd;
+ }
+  h1 {
+    margin:0; line-height: $topbar-height;
+    font-size: emCalc(30);
+  }
+  li {
+  line-height:$topbar-height;
+  height:$topbar-height;
+  }
+  li a, a { color: black; }
+
+  &.center-logo {
+    .title-area { text-align:center; }
+    h1 { float: none !important; }
+    .mobile-links {
+      float:none !important;  
+      position:absolute;
+      top:0;
+      right:0;
+      width:100%;
+      text-align:right;
+
+      li.search {
+        left:0;
+        position:absolute;
+      }
+    }
+  }
+}
+
+  .top-bar {
+    
+    // Center the Logo
+    &.center-logo {
+      .title-area {
+        text-align:center;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        float:none !important;  
+      }
+      li.name {
+        position:absolute;
+        left:50%;
+        width:222px;
+        margin-left: -111px;
+      }
+    }
+    &.black {
+      background: white;
+        #menu {
+          background:white;
+            li a { background:white; color: black;}
+        }
+    }
+    .checkout {
+      line-height:$topbar-height;
+    }
+  }
+
+  .reveal-modal {
+    background:none;
+    box-shadow:none;
+    border:none;
+  }
+
+  .reveal-white-bg {
+    background: rgba(#fff, .95) !important;
+  }
+
+/* SEARCH FORM
+ * ------------------------------------------------ */
+  #search-form {
+    input {
+      box-shadow:none;
+      background:none;
+      border-width: 0 0 1px 0 !important;
+      font-size: emCalc(32px) !important;
+    }
+    input:focus {
+      background:none !important;
+      box-shadow:none !important;
+
+    }
+  }
+
+
+/* HEADER
+ * ------------------------------------------------ */
+
+#cart {
+  li a { padding: 0 15px; 
+    &:hover {
+      background:none;
+    }
+  }
+}
+
+/* Mobile Navigation
+ * ------------------------------------------------ */
+ html.menu-opening {
+  margin-left:-65px;
+ }
+#mobile-navigation {
+  display:none;
+  position:fixed;
+  top:0;
+  left:0%;
+  z-index:9999;
+  width:100%;
+  background: $mobile_nav_bg;
+  height: $mobile_height;
+  line-height: $mobile_height;
+
+  ul {
+    padding: 0 20px;
+    line-height: $mobile_height;
+    margin:0;
+    height: $mobile_height;
+  }
+  li {
+    display:inline;
+    line-height: $mobile_height;
+    height: $mobile_height;
+
+    a {
+      font-weight:bold;
+      color: black;
+      font-size:emCalc(14px);
+    }
+  }
+  .search, #showCart { float:right; }
+  .search {
+    margin-right:20px;
+  }
+}
+.off-canvas.active {
+  .canvas-overlay {
+    display:none;
+      display:block;
+      position:fixed;
+      top:0;
+      right:0;
+      left:0;
+      bottom:0;
+      z-index:9999 !important;
+  }
+}
+.canvas-overlay {
+  display:none; 
+}
+  .mobile-cart {
+    #sideMenu {
+      #sideMainNav, #mobile-account-menu {
+        display:none;
+      }
+    }
+  }
+
+/* CUSTOMERS
+ * ------------------------------------------------ */
+#create-customer, #customer {
+  label { display:none; }
+}
+.mobile-links { display:none; padding: 0px 20px;
+  li { display:inline-block; line-height:$topbar-height !important; height:$topbar-height !important; margin-right:20px; }
+  li.last { margin-right:0px !important; }
+}
+
+#products {
+  .th {
+    box-shadow:none;
+  }
+}
+#home {
+  .top-bar {
+
+  }
+  .panel {
+    margin-top: 20px;
+  }
+  .slideshow-wrapper {
+    margin-top:100px;
+  }
+  #main-content {
+    margin-top:0px;
+  }
+}
+/* PRODUCTS
+ * ------------------------------------------------ */
+.preview-details {
+  padding:20px;
+  text-align:center;
+}
+
+/* FOOTER
+ * ------------------------------------------------ */
+#footer-blocks {
+  border-top: 1px solid #ddd;
+  padding-top: 40px; 
+  .panel { background:none; padding:0; border:none; }
+}
+
+/* Medium Screens
+ * ------------------------------------------------ */
+@media only screen and (max-width:940px) {
+
+  #nav li a{
+    padding-left: 20px;
+    padding-right:20px;
+  }
+  #main-header {
+    margin-top: $mobile_height;
+    @include single-transition(all);
+    position:relative;
+    #headerSearch {
+      display:block;
+    }
+  }
+  #main-content, .slideshow-wrapper {
+    margin-top: 0px !important;
+  }
+  #mobile-navigation {
+      @include opacity(1);
+  }
+  .title-area { float:left; }
+  .top-bar .name h1 a { width: auto !important; }
+    .top-bar-section {
+      display:none;
+    }
+    .mobile-links {
+      display:block;
+    }
+}
+
+/* Mobile Screens
+ * ------------------------------------------------ */
+@media only screen and (max-width:940px) {
+  #mobile-navigation {
+    display:block;
+
+  }
+}
+@media only screen {
+
+}

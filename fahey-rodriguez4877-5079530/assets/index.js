@@ -1,0 +1,16 @@
+// @codekit-append ../foundation/foundation.js
+/// @codekit-append ../foundation/foundation.alerts.js
+// @codekit-append ../foundation/foundation.clearing.js
+// @codekit-append ../foundation/foundation.cookie.js
+/// @codekit-append ../foundation/foundation.dropdown.js
+// @codekit-append ../foundation/foundation.forms.js
+// @codekit-append ../foundation/foundation.joyride.js
+// @codekit-append ../foundation/foundation.magellan.js
+// @codekit-append ../foundation/foundation.reveal.js
+// @codekit-append ../foundation/foundation.section.js
+/// @codekit-append ../foundation/foundation.tooltips.js
+// @codekit-append ../foundation/foundation.topbar.js
+// @codekit-append ../foundation/foundation.interchange.js
+// @codekit-append ../foundation/foundation.placeholder.js
+// @codekit-append ../foundation/foundation.abide.js
+// @codekit-append ../foundation/foundation.offcanvas.js

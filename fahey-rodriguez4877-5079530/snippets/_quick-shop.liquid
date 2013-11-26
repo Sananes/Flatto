@@ -1,0 +1,289 @@
+
+<a id="quick-shop-fancybox" href="#quick-shop-modal" style="display: none;"></a>
+<div id="quick-shop-modal" class="grid-container remove_padding" class="large-12 columns" style="display: none;">
+  <div class="row">
+
+
+   <!-- // Product Image -->
+          <div id="active-wrapper">
+   <div id="product-image">
+
+  
+     </div>
+           </div>
+   <!-- // End Product Image -->
+
+
+   <!-- // Product Thumbnails -->
+     <div id="quick-shop-thumbs" class="large-2 columns">
+
+     </div>
+   <!-- // End Product Image -->
+  
+   <!-- // Product Description -->
+      <div id="quick-shop-container" class="large-6 columns">
+
+        <div id="quick-shop-relative" class="relative align-left">
+          <ul>
+            <li class="vendor">
+              <!-- <span class="label">Vendor:</span>-->
+            </li>
+            <!-- <li class="type">
+              <span class="label">Type:</span>
+            </li> -->
+          </ul>
+        </div>
+
+
+        <h4 id="quick-shop-title"></h4>
+        <div id="quick-shop-price-container"><p class="detail-price"></p></div>
+
+           <form action="/cart/add" method="post" class="variants" id="quick-shop-product-actions" enctype="multipart/form-data">
+
+          
+          <div class="variants-wrapper">
+            <div id="quick-shop-variants-container">
+              
+            </div>
+          </div>
+            <div class="selector-wrapper">
+                <label style="width: 54px;">Quantity</label>
+                <input type="number" class="input-field" value="1" />
+            </div>
+          
+          <div class="selector-wrapper add-to-cart">
+            <label style="width:54px;"></label>
+              <input class="add-to-carts button" type="submit" name="add" value="Add to Cart" />
+          </div>
+      
+        </form>
+        <div id="quick-shop-infomation">
+
+          <div id="quick-shop-description">
+            
+            
+          </div>
+        <a id="view-details" class="button-link" href="/collections/accessories/products/voluptatem-accusantium-doloremque-3">View full details
+        
+        </div>
+         <!-- // End Product Description -->
+        </div>
+        </a>
+      </div>
+
+   <script>
+      $(document).ready(function(){
+            {% if template contains "product" %}
+    {% else %}
+          $('#quick-shop').enhanceGallery();
+    {% endif %}
+  });
+    </script>
+<script type="text/javascript">
+
+  jQuery(document).ready(function($) {
+
+
+
+    // Create fancybox
+    $(".quick-shop-fancybox").fancybox({
+      width: '900px',
+      height: 'auto',
+      autoSize: false,
+      title: false,
+      padding: 30,
+      tpl: {
+        wrap: '<div id="quick-shop" class="fancybox-wrap" tabIndex="-1"><div class="fancybox-skin"><div class="fancybox-outer"><div class="fancybox-inner"></div></div></div></div>'
+}
+    });
+    
+    var quickShopModal = $('#quick-shop-modal');
+    var quickShopContainer = $('#quick-shop-container');
+    var quickShopImage = $('#product-image');
+    var quickShopImageAndThumb = $('#product-image, #quick-shop-container');
+    var quickShopThumbs = $('#quick-shop-thumbs');
+    var quickShopTitle = $('#quick-shop-title');
+    var quickShopDescription = $('#quick-shop-description');
+    var quickShopRelative = $('#quick-shop-relative');
+    var quickShopLink = $('#quick-shop-link');
+    var quickShopVariantsContainer = $('#quick-shop-variants-container');
+    var quickShopPriceContainer = $('#quick-shop-price-container');
+    var quickShopAddButton = $('#quick-shop-add');
+    var quickShopAddToCartButton = $('#quick-shop-add');
+    var quickShopProductActions = $('#quick-shop-product-actions');
+    
+
+    $('body').on('click', '.quick_shop:not(.unavailable)', function(event){
+          $('.quick-shop-modal').enhanceGallery();
+      var $this = $(this);
+      var product_json = $this.find('.product-json').html();
+      
+      // Grab product data
+      var selectedProduct = JSON && JSON.parse(product_json) || $.parseJSON(product_json);
+      var selectedProductID = selectedProduct.id;
+      
+      // Update add button
+      quickShopAddButton.data('product-id', selectedProductID );
+      
+      
+      // Update image & thumbs
+      quickShopImage.html('');
+      quickShopThumbs.html('');
+
+      quickShopImage.append('<img id="active-image" src="'+selectedProduct.featured_image+'" />');
+
+      var qs_images = selectedProduct.images;
+      quickShopThumbs.append('<div class="product-images"><ul id="thumbs" class="product-thumb"> </ul></div>');
+      quickShopThumbs.show();
+      quickShopImageAndThumb.removeClass('large-6 columns').addClass('large-5 columns');
+      if(qs_images.length > 1) {
+      $.each(qs_images, function(index, value) {
+        if(index)
+          quickShopThumbs.find('.product-thumb').append('<li><a href="#"><img src="'+value+'" alt="'+quickShopTitle+'" /></a></li>');
+        else
+          quickShopThumbs.find('.product-thumb').append('<li><a href="#"><img src="'+value+'" alt="'+quickShopTitle+'" /></a></li>');
+      });
+     } else {
+      quickShopThumbs.hide();
+      quickShopImageAndThumb.removeClass('large-5 columns').addClass('large-6 columns');
+     }
+      
+      // Update title
+      quickShopTitle.html('<a href="/products/' + selectedProduct.handle +'">'+selectedProduct.title + '</a>');
+      
+      // Update description
+      quickShopDescription.html('<p>' + selectedProduct.description + '</p>');
+      
+      // Update relative
+      quickShopRelative.find('a').remove();
+      
+      quickShopRelative.find('.vendor').after('<a href="/collections/vendors?q='+selectedProduct.vendor.replace(' ', '+')+'"> '+selectedProduct.vendor+'</a>');
+      quickShopRelative.find('.type .label').after('<a href="/collections/types?q='+selectedProduct.type.replace(' ', '+')+'"> '+selectedProduct.type+'</a>');
+      //alert(JSON.stringify(selectedProduct));
+      
+      
+      // Update link
+      quickShopLink.attr('href', '/products/'+selectedProduct.handle);
+      
+      // Generate variants
+      var productVariants = selectedProduct.variants;
+      var productVariantsCount = productVariants.length;
+      
+      quickShopPriceContainer.html('');
+      quickShopVariantsContainer.html('');
+      
+      if (productVariantsCount > 1) {
+
+        // Reveal variants container
+        quickShopVariantsContainer.show();
+        
+        // Build variants element
+        var quickShopVariantElement = $('<select>',{ 'id': ('#quick-shop-variants-' + selectedProductID) , 'name': 'id'});
+
+        var quickShopVariantOptions = '';
+ 
+        for (var i=0; i < productVariantsCount; i++) {
+          quickShopVariantOptions += '<option value="'+ productVariants[i].id +'">'+ productVariants[i].title +'</option>'
+        };
+        
+        // Add variants element to page
+        quickShopVariantElement.append(quickShopVariantOptions);
+        quickShopVariantsContainer.append(quickShopVariantElement);
+        
+        // Bind variants to OptionSelect JS
+        new Shopify.OptionSelectors(('#quick-shop-variants-' + selectedProductID), { product: selectedProduct, onVariantSelected: selectOptionCallback });
+        
+        // Add label if only one product option and it isn't 'Title'.
+        if (selectedProduct.options.length == 1 && selectedProduct.options[0] != 'Title' ){
+          $('#quick-shop-product-actions .selector-wrapper:eq(0)').prepend('<label>'+ selectedProduct.options[0] +'</label>');
+        }
+        
+        // Auto-select first available variant on page load.
+        var found_one_in_stock = false;
+        for (var i=0; i < selectedProduct.variants.length; i++) {
+          
+          var variant = selectedProduct.variants[i];
+          if(variant.available && found_one_in_stock == false) {
+            
+            found_one_in_stock = true;
+            for (var j=0; j < variant.options.length; j++){
+              
+              $('.single-option-selector:eq('+ j +')').val(variant.options[j]).trigger('change');
+              
+            }
+          }
+        }
+        
+        $('#quick-shop-variants-container .single-option-selector').wrap('<div style="width:50%; display:inline-block;" />');
+  
+      } else { // If product only has a single variant
+        $('.selector-wrapper.add-to-cart label').hide();
+        // Hide unnecessary variants container
+        quickShopVariantsContainer.hide(); 
+        
+        // Update the add button to include correct variant id
+        quickShopAddToCartButton.data('variant-id', productVariants[0].id);
+        
+        // Determine if product is on sale
+        if ( productVariants[0].compare_at_price > 0 && productVariants[0].compare_at_price > productVariants[0].price ) {
+          quickShopPriceContainer.html('<p class="detail-price"><span class="price_sale"><span class="money">'+ Shopify.formatMoney(productVariants[0].price, "") +'</span></span> '+'<span class="price"> <del><span class="money">'+ Shopify.formatMoney(productVariants[0].compare_at_price, "") + '</span></del></span></p>');
+        } else {
+          quickShopPriceContainer.html('<p class="detail-price"><span class="price"><span class="money">'+ Shopify.formatMoney(productVariants[0].price, "") + '</span></span></p>' );
+        }
+        
+      } // END of (productVariantsCount > 1)
+      
+      // Change currency
+      /* Currency.convertAll('{{ shop.currency }}', Currency.cookie.read(), '#quick-shop-modal span.money', '{{ settings.currency_format }}');
+      */
+    });
+    
+    /* selectOptionCallback
+      ===================================== */
+    var selectOptionCallback = function(variant, selector) {
+      
+      // selected a valid and in stock variant
+      if (variant && (variant.inventory_quantity > 0 || (variant.inventory_quantity <= 0 && variant.inventory_policy == 'continue') ) ) {
+        
+        quickShopAddToCartButton.data('variant-id', variant.id);
+        
+        if ($.browser === 'undefined') {
+          quickShopAddToCartButton.removeAttr('disabled').show(); 
+        } else {
+          quickShopAddToCartButton.removeAttr('disabled').fadeTo(200,1); 
+        }
+        
+        // determine if variant is on sale
+        if ( variant.compare_at_price > 0 && variant.compare_at_price > variant.price ) {
+          quickShopPriceContainer.html('<p class="detail-price"><span class="price_sale"><span class="money">'+ Shopify.formatMoney(variant.price, "") +'</span></span> '+'<span class="price"> <del><span class="money">'+ Shopify.formatMoney(variant.compare_at_price, "") + '</span></del></span></p>');
+        } else {
+          quickShopPriceContainer.html('<p class="detail-price"><span class="price"><span class="money">'+ Shopify.formatMoney(variant.price, "") + '</span></span></p>' );
+        };
+        
+        // selected an invalid or out of stock variant 
+      } else {
+        
+        // variant doesn't exist
+        if ($.browser === 'undefined') {
+          quickShopAddToCartButton.attr('disabled', 'disabled').hide();
+        } else {
+          quickShopAddToCartButton.attr('disabled', 'disabled').fadeTo(200,0.5);
+        }
+        var message = variant ? "Sold Out" : "Unavailable";    
+        quickShopPriceContainer.html('<p class="detail-price unavailable">' + message + '</p>');
+        
+      }
+      
+      // Change currency
+      /* Currency.convertAll('{{ shop.currency }}', Currency.cookie.read(), '#quick-shop-modal span.money', '{{ settings.currency_format }}');
+   */ } 
+
+
+
+
+          $('#active-wrapper').on('click', $('#active-image'), function() {
+            alert('Gay');
+          });
+
+    });
+</script>

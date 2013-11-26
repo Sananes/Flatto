@@ -1,0 +1,63 @@
+<!-- Product Loop -->
+{% capture collection_handle %}{{ product-loop | handleize }}{% endcapture %}
+{% capture url %}{% if collection_handle != "" %}/collections/{{ product-loop }}{{ product.url }}{% else %}{{ product.url }}{% endif %}{% endcapture %}
+<li id="product-{{product.id}}" class="product-item {% if settings.products_per_row == "4" %} large-3 columns{% endif %}{% if settings.products_per_row == "3" %} large-4 columns{% endif %}{% if settings.products_per_row == "2" %} large-6 columns{% endif %}">
+
+
+       {% if settings.quick_shop_enable %} 
+  {% include "quick-shop" %}
+    {% endif %}
+  <div class="block-inner">
+  
+  
+    <div class="product-preview">
+  <figure>
+
+    {% if product.price_min < product.compare_at_price_min %}
+      {% if settings.show_sale_circle %}
+        <span class="sale-tag"></span>
+        <!-- Uncomment this if you want to use the Foundation Icon Font Sale Style <span class="sale-tag-icon"></span> -->
+      {% endif %}
+    {% endif %}
+          <img src="{{ product.featured_image | product_img_url: 'grande' }}" alt="{{ product.title | escape  }}" />
+
+    {% if settings.quick_shop_enable %}
+      <a href="#quick-shop-{{product.id}}" id="quick-shop-normal-link"> </a>
+    <div class="quick-shop-view overlay">
+      <a href="#quick-shop-{{product.id}}" class="quick-shop-link quick-shop"></a>
+      <span>Quick View</span> 
+       </div>
+    {% else %}
+       <a href="{{ url }}" id="no-quick-shop"> </a>
+    {% endif %}
+
+
+  </figure>
+    </div>
+
+<div class="preview-details">
+    <h5 class="title"><a href= "{{ product.url | within: collection }}">{{ product.title | truncate: 30 }}</a></h5>
+    {% if settings.product_vendor %}
+    <span class="vendor">{{ product.vendor }}</span>
+    {% endif %}
+<div id="product-price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+        <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
+        {% if product.available %}
+        <link itemprop="availability" href="http://schema.org/InStock" />
+        {% else %}
+        <link itemprop="availability" href="http://schema.org/OutOfStock" />
+        {% endif %}
+        <h5>
+          {% if product.compare_at_price > product.price %}
+          <span class="price" itemprop="price">{{ product.price | money }}</span>&nbsp;<s class="sale-price">{{ product.compare_at_price_max | money }}</s>
+          {% else %}
+          <span class="price" itemprop="price">{{ product.price | money }}</span>
+          {% endif %}
+        </h5>
+    </div>
+  </div>
+
+
+    
+  </div>
+</li>

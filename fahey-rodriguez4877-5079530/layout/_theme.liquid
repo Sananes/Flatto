@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">  
+
+	{% comment %} Shopify Head Begin {% endcomment %}
+
+	{% if template == 'index' %}
+	<title>{{ shop.name }} | {{ page_title }}</title>
+	{% elsif template == '404' %}
+	<title>Page Not Found | {{ shop.name }}</title>
+	{% else %}
+	<title>{{ page_title }} | {{ shop.name }}</title>
+	{% endif %}
+
+	{% if page_description %}
+	<meta name="description" content="{{ page_description }}" />
+	{% endif %}
+
+	{{ content_for_header }}
+
+	{{ 'normalize.css' | asset_url | stylesheet_tag }}
+  {{ 'style.css' | asset_url | stylesheet_tag }}
+	{{ 'foundation-icons.css' | asset_url | stylesheet_tag }}
+  {{ 'mmenu.css' | asset_url | stylesheet_tag }}
+	{{ 'custom.css' | asset_url | stylesheet_tag }}
+
+
+
+
+
+	{% if template contains 'customers' %}
+	{{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+	{{ 'customer_area.js'  | shopify_asset_url | script_tag }}
+	{% endif %}
+
+	{{ 'option_selection.js' | shopify_asset_url | script_tag }}
+
+	{{ '//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js' | script_tag }}
+
+	<!-- Icons -->
+	<link rel="shortcut icon" href="{{ 'favicon.ico' | asset_url }}" type="image/x-icon" />
+	<link rel="apple-touch-icon-precomposed" href="{{ 'apple-touch-icon-precomposed.png' | asset_url }}" />
+	<link rel="apple-touch-icon-precomposed" sizes="57x57" href="{{ 'apple-touch-icon-57x57-precomposed.png' | asset_url }}" />
+	<link rel="apple-touch-icon-precomposed" sizes="60x60" href="{{ 'apple-touch-icon-60x60-precomposed.png' | asset_url }}" />
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ 'apple-touch-icon-72x72-precomposed.png' | asset_url }}" />
+	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="{{ 'apple-touch-icon-76x76-precomposed.png' | asset_url }}" />
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ 'apple-touch-icon-114x114-precomposed.png' | asset_url }}g" />
+	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="{{ 'apple-touch-icon-120x120-precomposed.png' | asset_url }}" />
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ 'apple-touch-icon-144x144-precomposed.png' | asset_url }}" />
+	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{ 'apple-touch-icon-152x152-precomposed.png' | asset_url }}" />
+
+</head>
+
+<body class="{{ template | replace: '.', ' ' | truncatewords: 1, '' }} antialiased off-canvas hide-extras" id="{% if template == 'index' %}home{% else %}{{ page_title || handle }}{% endif %}">
+ <div id="wrapper">
+  <!-- Include Mobile Navigation -->
+    {% include 'mobile-navigation' %}
+  <!-- End Mobile Navigation -->
+  
+  	<!-- Include Main Content -->
+  	<main id="main" role="main">
+
+    <!-- Include Top Navigation -->
+      {% include 'header' %}
+    <!-- End Include Top Navigation -->
+      {% if template == 'index' %}
+        {% if settings.slideshow_enable %}
+      <!-- Slideshow -->
+        {% include 'slideshow' %}
+      <!-- End Slideshow -->
+        {% endif %}
+      {% endif %}
+    
+    <div class="row">
+
+  		{% if template == 'list-collections' %}
+  		  {% include 'collection-listing' %}
+  		{% else %}
+  		  {{ content_for_layout }}
+  		{% endif %}
+    </div>
+
+
+  	</main>
+  	<!-- End Include Main Content -->
+
+	{% if settings.bottom_menu_on %}  
+		<!-- Include Bottom Navigation -->
+			{% include 'bottom-navigation' %}
+		<!-- End Include Bottom Navigation -->
+	{% endif %}
+ 
+  	<!-- Include Footer -->
+		{% include 'footer' %}
+  	<!-- End Include Footer Content -->
+     </div>
+  	<script>
+    document.write('<script src=' + ('__proto__' in {} ? '{{ 'zepto.js' | asset_url }}' : '{{ 'jquery.js' | asset_url }}') + '><\/script>');
+  	</script>
+  
+	{{ 'foundation.min.js' | asset_url | script_tag }}
+  
+  	<script>
+    $(document).foundation();
+    $("#searchform").foundation('reveal', {
+        animation: 'fadeAndPop',
+        animationSpeed: 250,
+        closeOnBackgroundClick: true,
+        dismissModalClass: 'close-reveal-modal',
+        bgClass: 'reveal-modal-bg',
+        open: function(){
+
+        },
+        opened: function(){
+          $(this).find("input").focus();
+        },
+        close: function(){},
+        closed: function(){},
+        bg : $('.reveal-modal-bg'),
+        css : {
+          open : {
+            'opacity': 0,
+            'visibility': 'visible',
+            'display' : 'block'
+          },
+          close : {
+            'opacity': 1,
+            'visibility': 'hidden',
+            'display': 'none'
+          }
+        }
+});
+
+  	</script>
+
+  	<!-- Let's add a product zoom becaue Foundation doesn't have one. Thank's to Jack Moore! -->
+  	{{ 'jquery.zoom.js' | asset_url | script_tag }}
+    {{ 'jquery.swipe.js' | asset_url | script_tag }}
+    {{ 'jquery.offcanvas.js' | asset_url | script_tag }}
+    {{ 'main.js' | asset_url | script_tag }}
+
+    <script>
+    $(document).ready( function() {
+
+      // Custom Navigation
+      /* if($('#sideMainNav').length > 0) {
+        $(this).find('.dropdown').hide();
+        var link = $('#sideMainNav li');
+          link.each( function(e) {
+          e.preventDefault;
+            var $link = $(this);
+            var $otherlinks = $link.find('li');
+            var dropdown = $link.find('.dropdown');
+            var active = $link.find('.active');
+           
+               if($link.hasClass('active') || $otherlinks.hasClass('active')) {
+                  $link.find('.dropdown').show();
+                } 
+                  $link.find('i').click( function() {
+                  $link.find('.dropdown').toggle();
+
+                });
+                  
+              
+            });
+
+
+
+        }
+       */
+      
+
+    </script>
+ 
+</body>
+</html>

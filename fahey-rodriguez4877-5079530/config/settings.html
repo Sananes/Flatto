@@ -1,0 +1,471 @@
+<div class="section-info">
+	<p>Theme settings allow designers to provide an easy way for any user to customize the look and feel of their shop without having to delve into HTML or CSS code. Please see our <a title="Open Wiki in a new window" target="wiki" href="http://wiki.shopify.com/Theme_Settings">help page on theme settings</a> to learn more about how you can make your theme customizable.</p>
+</div>
+
+<fieldset>
+  <legend>General</legend>
+  <h3>Homepage Options</h3>
+
+  <table>
+  
+  </table>
+      <h3>Footer Options</h3>
+  <table>
+        <tr>
+          <th><label for="fw_support_links">Enable Support Links?</label></th>
+          <td><input type="checkbox" id="fw_support_links" name="fw_support_links" /></td>
+        </tr>
+      <tr>
+      <th><label for="payment_methods">Payment Methods:</label></th>
+      <td>
+        <input type="checkbox" id="accept_visa" name="accept_visa" value="1" /> Visa
+        <input type="checkbox" id="accept_mastercard" name="accept_mastercard" value="1" /> Mastercard
+        <input type="checkbox" id="accept_amex" name="accept_amex" value="1" /> American Express
+        <input type="checkbox" id="accept_cirrus" name="accept_cirrus" value="1" /> Cirrus
+        <input type="checkbox" id="accept_delta" name="accept_delta" value="1" /> Delta
+        <input type="checkbox" id="accept_discover" name="accept_discover" value="1" /> Discover
+        <input type="checkbox" id="accept_westernunion" name="accept_westernunion" value="1" /> Western Union
+        <input type="checkbox" id="accept_paypal" name="accept_paypal" value="1" /> PayPal
+      </td>
+    </tr>
+      <tr class="vertical">
+      <th><label for="fw_about">About Us</label></th>
+      <td><textarea id="fw_about" name="fw_about"></textarea></td>
+    </tr>
+      <tr class="horizontal">
+      <th><label for="homepage">Additional home page content?</label></th>
+      <td><select class="page" name="homepage" id="homepage" /></td>
+    </tr>
+     <tr>
+       <th><label for="fw_mmenu_pos">Mobile Position</label></th>
+       <td>
+         <input type="radio" name="fw_mmenu_pos" value="left" /> Left
+         <input type="radio" name="fw_mmenu_pos" value="right" /> Right
+         <input type="radio" name="fw_mmenu_pos" value="top" /> Top
+       </td>
+     </tr>
+
+        <tr>
+          <th><label for="fw_social_links">Enable Social Links?</label></th>
+          <td><input type="checkbox" id="fw_social_links" name="fw_social_links" /></td>
+        </tr>
+        <tr>
+          <th><label for="fw_twitter_link">Twitter Link</label></th>
+          <td><input type="text" id="fw_twitter_link" name="fw_twitter_link" /></td>
+        </tr>
+        <tr>
+          <th><label for="fw_fb_link">Facebook Link</label></th>
+          <td><input type="text" id="fw_fb_link" name="fw_fb_link" /></td>
+        </tr>
+          <tr>
+          <th><label for="fw_pin_link">Pinterest Link</label></th>
+          <td><input type="text" id="fw_pin_link" name="fw_pin_link" /></td>
+        </tr>
+          <tr>
+          <th><label for="fw_youtube_link">YouTube Link</label></th>
+          <td><input type="text" id="fw_youtube_link" name="fw_youtube_link" /></td>
+        </tr>
+        <tr>
+          <th><label for="fw_gplus_link">Google+ Link</label></th>
+          <td><input type="text" id="fw_gplus_link" name="fw_gplus_link" /></td>
+        </tr>
+  </table>
+
+  <h3>Social Links</h3>
+  <table>
+        <tr>
+          <th><label for="fw_support_links">Enable Support Links?</label></th>
+          <td><input type="checkbox" id="fw_support_links" name="fw_support_links" /></td>
+        </tr>
+
+        <tr>
+          <th><label for="fw_social_links">Enable Social Links?</label></th>
+          <td><input type="checkbox" id="fw_social_links" name="fw_social_links" /></td>
+        </tr>
+
+  </table>
+
+  <h3>Logo Options</h3>
+<table>
+    <tr>
+      <th><label for="use_logo">Use Custom Logo?</label></th>
+      <td><input type="checkbox" id="use_logo" name="use_logo" /></td>
+    </tr>
+  <tr>
+      <td><label for="content_bg_colour">Content Background</label></td>
+      <td><input id="content_bg_colour" name="content_bg_colour" class="color miniColors" maxlength="7" /></td>
+    </tr>
+    <tr>
+      <th><label for="logo_image">Custom Logo</label></th>
+      <td><input type="file" name="logo.png" id="logo_image" data-max-width="940" data-max-height="300" /></td>
+    </tr>
+    <tr>
+      <th><label for="logo_image">Background Color</label></th>
+      <td><input type="file" name="logo.png" id="logo_image" data-max-width="940" data-max-height="300" /></td>
+    </tr>
+    <tr>
+      <th><label for="site_title">Include Site Title as 'Heading 1'</label></th>
+      <td><input type="checkbox" id="site_title" name="site_title" /></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+      	<small>
+		  Maximum logo dimensions are 940px wide by 300px high.<br />
+		  Your uploaded file will be resized to fit within those constraints.<br />
+		  Need a full-width banner? Upload an image with a width of 940px, and a height of 300px or less.
+      	</small>
+      </td>
+    </tr>
+
+  </table>
+  
+</fieldset>
+<fieldset>
+  <legend>Typography</legend>
+  <h3>Main Titles</h3>
+  <table>
+   <tr class="vertical">
+      <td><label for="logo_font">Logo Font</label></td>
+      <td>
+        <select name="logo_font" id="logo_font">          
+          <optgroup label="Sans-serif">
+            <option value="'Helvetica Neue', Helvetica, Arial, sans-serif" selected="selected">Helvetica/Arial</option>
+            <option value="Impact, Charcoal, Helvetica, Arial, sans-serif">Impact</option>
+            <option value="'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Lucida, Helvetica, Arial, sans-serif">Lucida Grande</option>
+            <option value="Trebuchet MS, sans-serif">Trebuchet MS</option>
+            <option value="Verdana, Helvetica, Arial, sans-serif">Verdana</option>
+            <option value="Google_Asap_400_sans">Asap Normal 400</option>
+            <option value="Google_Cabin_400_sans">Cabin Semi-Bold 600</option>
+            <option value="Google_Molengo_400_sans">Molengo Normal 400</option>
+            <option value="Google_Open+Sans:600_600_sans">Open Sans Semi Bold 600</option>
+            <option value="Google_PT+Sans_400_sans">PT Sans Normal 400</option>
+            <option value="Google_Ubuntu:500_500_sans">Ubuntu Medium 500</option>
+          </optgroup>
+          <optgroup label="Serif">
+            <option value="Garamond, Baskerville, Caslon, serif">Garamond</option>
+            <option value="Georgia, Utopia, 'Times New Roman', Times, serif">Georgia</option>
+            <option value="Palatino, 'Palatino Linotype', 'Book Antiqua', serif">Palatino</option>
+            <option value="'Times New Roman', Times, serif">Times New Roman</option>
+            <option value="Google_Droid+Serif_400_serif">Droid Serif Normal 400</option>
+          </optgroup>
+          <optgroup label="Monospace">
+            <option value="'Courier New', Courier, monospace">Courier New</option>
+            <option value="Monaco, 'Lucida Console', 'DejaVu Sans Mono', monospace">Monaco/Lucida Console</option>
+          </optgroup>
+          <optgroup label="Fancy">
+            <option value="Google_Cabin+Sketch_400_sans">Cabin Sketch Normal 400</option>
+            <option value="Google_Pompiere_400_sans">Pompiere Normal 400</option>
+            <option value="Google_Shadows+Into+Light_400_sans">Shadows Into Light Normal 400</option>
+          </optgroup>
+        </select>
+      </td>
+    </tr>
+    </table>
+</fieldset>
+
+<fieldset>
+  <legend>Slideshow</legend>
+	<h3>Slideshow Options</h3>
+	
+	<table>
+		<tr>
+			<th><label for="slideshow_enable">Enable Slideshow on Home Page?</label></th>
+			<td><input type="checkbox" id="slideshow_enable" name="slideshow_enable" /></td>
+		</tr>
+		<tr>
+			<th><label for="slideshow_pause">Pause Slideshow On Hover?</label></th>
+			<td><input type="checkbox" id="slideshow_pause" name="slideshow_pause" /></td>
+		</tr>
+		<tr>
+			<th><label for="slideshow_image_1">Slideshow Image 1</label></th>
+			<td><input type="file" name="slideshow_image_1.png" id="slideshow_image_1" data-max-width="1000" data-max-height="563" /></td>
+		</tr>
+		<tr>
+			<th><label for="slideshow_image_2_enable">Use a second slideshow image?</label></th>
+			<td><input type="checkbox" id="use_logo" name="slideshow_image_2_enable" /></td>
+		</tr>
+		<tr>
+			<th><label for="slideshow_image_2">Slideshow Image 2</label></th>
+			<td><input type="file" name="slideshow_image_2.png" id="slideshow_image_2" data-max-width="1000" data-max-height="563" /></td>
+		</tr>
+		<tr>
+			<th><label for="slideshow_image_3_enable">Use a third slideshow image?</label></th>
+			<td><input type="checkbox" id="use_logo" name="slideshow_image_3_enable" /></td>
+		</tr>
+		<tr>
+			<th><label for="slideshow_image_3">Slideshow Image 3</label></th>
+			<td><input type="file" name="slideshow_image_3.png" id="slideshow_image_3" data-max-width="1000" data-max-height="563" /></td>
+		</tr>
+	</table>
+
+</fieldset>
+
+
+<fieldset>
+  <legend>Collections</legend>
+
+  	<table>
+		<tr>
+			<th><label for="products_per_row">Products Per Row</label></th>
+			<td>
+				<select name="products_per_row" id="products_per_row">
+			        <option value="2">2</option>
+					<option value="3" selected="selected">3</option>
+					<option value="4">4</option>
+				</select>
+			</td>
+		</tr>
+
+    <tr>
+      <th><label for="display_quantity_dropdown">Show Quantity</label></th>
+      <td>
+      <input type="checkbox" id="display_quantity_dropdown" name="display_quantity_dropdown" />
+      </td>
+    </tr>
+	</table>
+
+  	<table>
+		<tr>
+		  <th><label for="pagination_limit">Products Per Page</label></th>
+		  <td>
+			<select name="pagination_limit" id="pagination_limit">
+			  <option value="48">48</option>
+			  <option value="36">36</option>
+			  <option value="24">24</option>
+			  <option value="12" selected="selected">12</option>
+			  <option value="9">9</option>
+			  <option value="8">8</option>
+			  <option value="6">6</option>
+			  <option value="4">4</option>
+			  <option value="3">3</option>
+			</select>
+		  </td>
+		</tr>
+	</table>
+
+	<table>	
+		<tr class="horizontal">
+		  <th><label for="show_sale_circle">Show sale circle on products?</label></th>
+		  <td>
+			<input type="checkbox" id="show_sale_circle" name="show_sale_circle" value="1" />
+		  </td>
+		</tr>
+	</table>
+	
+</fieldset>
+
+
+<fieldset>
+  <legend>Products</legend>
+
+  	<table>
+		<tr>
+			<th><label for="related-products">Show Related Products?</label></th>
+			<td><input type="checkbox" id="related-products" name="related-products" /></td>
+		</tr>
+
+    <tr>
+      <th><label for="quick_shop_enable">Enable Quick Shop?</label></th>
+      <td>
+      <input type="checkbox" id="quick_shop_enable" name="quick_shop_enable" />
+      </td>
+    </tr>
+	</table>
+	
+</fieldset>
+
+
+<fieldset>
+  <legend>Extra Widgets</legend>
+  <table>
+    <tr>
+      <th><label for="fw_on">Enable Footer Widgets</label></th>
+      <td><input type="checkbox" id="fw_on" name="fw_on" /></td>
+    </tr>
+  </table>
+
+  <h3>Widget 1</h3>
+  <table>
+    <tr>
+      <th><label for="fw_one_title">Title</label></th>
+      <td><input id="fw_one_title" name="fw_one_title" /></td>
+    </tr>
+    <tr>
+      <th><label for="fw_one_txt">Text</label></th>
+      <td><textarea id="fw_one_txt" name="fw_one_txt"></textarea></td>
+    </tr>
+	</table>
+
+  <h3>Widget 2</h3>
+  <table>
+    <tr>
+      <th><label for="fw_two_title">Title</label></th>
+      <td><input id="fw_two_title" name="fw_two_title" /></td>
+    </tr>
+    <tr>
+      <th><label for="fw_two_txt">Text</label></th>
+      <td><textarea id="fw_two_txt" name="fw_two_txt"></textarea></td>
+    </tr>
+  </table>
+
+  <h3>Widget 3</h3>
+  <table>
+    <tr>
+      <th><label for="fw_three_title">Title</label></th>
+      <td><input id="fw_three_title" name="fw_three_title" /></td>
+    </tr>
+    <tr>
+      <th><label for="fw_three_txt">Text</label></th>
+      <td><textarea id="fw_three_txt" name="fw_three_txt"></textarea></td>
+    </tr>
+  </table>
+
+  <table>
+    <tr>
+      <td><small>You can use HTML code or standard Text.</small></td>
+    </tr>
+  </table>
+</fieldset>
+
+<fieldset>
+  <legend>MailChimp Form</legend>
+  <table>
+  <tr>
+    <th><label for="fw_mc_inc">Include Mailchimp Form</label></th>
+    <td><input type="checkbox" id="fw_mc_inc" name="fw_mc_inc" /></td>
+  </tr>
+  <tr>
+    <th><label for="fw_mc_title">Newsletter Title</label></th>
+    <td><input type="text" value="News &amp; Updates" id="fw_mc_title" name="fw_mc_title" /></td>
+  </tr>
+  <tr>
+    <th><label for="fw_mc_dec">Description</label></th>
+    <td><input type="text" value="" id="fw_mc_dec" name="fw_mc_dec" /></td>
+  </tr>
+  <tr>
+    <th><label for="fw_mc_form_id">Mailchimp Form ID</label></th>
+    <td><input type="text" id="fw_mc_form_id" name="fw_mc_form_id" class="text" value="Form ID" /></td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <small>
+        If you want to add a Mailchimp subscription form select 'Include Mailchimp Form'<br />
+        IMPORTANT: Make sure you add your Form ID!
+      </small>
+    </td>
+  </tr>
+  </table>
+  
+</fieldset>
+
+<fieldset>
+  <legend>Bottom Menu</legend>
+  
+  	<table>
+		<tr>
+		  <th><label for="bottom_menu_on">Enable Bottom Menu</label></th>
+		  <td><input type="checkbox" id="bottom_menu_on" name="bottom_menu_on" /></td>
+		</tr>
+	</table>
+	
+</fieldset>
+
+
+<fieldset>
+  <legend>Browser, iOS &amp; Android Icons</legend>
+ 
+  <h3>Please only change this section if you know what you are doing</h3>
+  <table>
+    <tr>
+      <th><label for="favicon">Favicon</label></th>
+      <td><input type="file" name="favicon.ico" id="favicon" data-max-width="64" data-max-height="64" /></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+      	<small>Must be 64x64 pixels 'favicon.ico' file</small>
+      </td>
+    </tr>
+    <tr>
+      <th><label for="apple-touch-icon-precomposed">Generic Touch Icon</label></th>
+      <td><input type="file" name="apple-touch-icon-precomposed.png" id="apple-touch-icon-precomposed" data-max-width="57" data-max-height="57" /></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+      	<small>Must be 57x57 pixels</small>
+      </td>
+    </tr>
+    <tr>
+      <th><label for="apple-touch-icon-57x57-precomposed">57x57 Icon</label></th>
+      <td><input type="file" name="apple-touch-icon-57x57-precomposed.png" id="apple-touch-icon-57x57-precomposed" data-max-width="57" data-max-height="57" /></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+      	<small>Must be 57x57 pixels</small>
+      </td>
+    </tr>
+    <tr>
+      <th><label for="apple-touch-icon-60x60-precomposed">60x60 Icon</label></th>
+      <td><input type="file" name="apple-touch-icon-60x60-precomposed.png" id="apple-touch-icon-60x60-precomposed" data-max-width="60" data-max-height="60" /></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+      	<small>Must be 60x60 pixels</small>
+      </td>
+    </tr>
+    <tr>
+      <th><label for="apple-touch-icon-72x72-precomposed">72x72 Icon</label></th>
+      <td><input type="file" name="apple-touch-icon-72x72-precomposed.png" id="apple-touch-icon-72x72-precomposed" data-max-width="72" data-max-height="72" /></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+      	<small>Must be 72x72 pixels</small>
+      </td>
+    </tr>
+    <tr>
+      <th><label for="apple-touch-icon-76x76-precomposed">76x76 Icon</label></th>
+      <td><input type="file" name="apple-touch-icon-76x76-precomposed.png" id="apple-touch-icon-76x76-precomposed" data-max-width="76" data-max-height="76" /></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+      	<small>Must be 76x76 pixels</small>
+      </td>
+    </tr>
+    <tr>
+      <th><label for="apple-touch-icon-114x114-precomposed">114x114 Icon</label></th>
+      <td><input type="file" name="apple-touch-icon-114x114-precomposed.png" id="apple-touch-icon-114x114-precomposed" data-max-width="114" data-max-height="114" /></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+      	<small>Must be 114x114 pixels</small>
+      </td>
+    </tr>
+    <tr>
+      <th><label for="apple-touch-icon-120x120-precomposed">120x120 Icon</label></th>
+      <td><input type="file" name="apple-touch-icon-120x120-precomposed.png" id="apple-touch-icon-120x120-precomposed" data-max-width="120" data-max-height="120" /></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+      	<small>Must be 120x120 pixels</small>
+      </td>
+    </tr>
+    <tr>
+      <th><label for="apple-touch-icon-144x144-precomposed">144x144 Icon</label></th>
+      <td><input type="file" name="apple-touch-icon-144x144-precomposed.png" id="apple-touch-icon-144x144-precomposed" data-max-width="144" data-max-height="144" /></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+      	<small>Must be 144x144 pixels</small>
+      </td>
+    </tr>
+    <tr>
+      <th><label for="apple-touch-icon-152x152-precomposed">152x152 Icon</label></th>
+      <td><input type="file" name="apple-touch-icon-152x152-precomposed.png" id="apple-touch-icon-152x152-precomposed" data-max-width="152" data-max-height="152" /></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+      	<small>Must be 152x152 pixels</small>
+      </td>
+    </tr>
+  </table>
+  
+</fieldset>

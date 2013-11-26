@@ -1,0 +1,14 @@
+
+    <div class="slideshow-wrapper">
+      <div class="preloader"></div>
+      <ul data-orbit data-options="animation:fade;slide_number: false;timer:false;bullets:false;{% if settings.slideshow_pause %}pause_on_hover:true;resume_on_mouseout:true;{% else %}pause_on_hover:false;{% endif %}" class="text-center">
+        <li>
+          {{ 'slideshow_image_1.png' | asset_url | img_tag: shop.name }}
+          <div class="orbit-caption">
+            <h2>Caption One.</h2> 
+            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+            <a class="button" href="#">Learn More</a>
+          </div>
+        </li>
+      </ul>
+      </div>
