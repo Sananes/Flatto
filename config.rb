@@ -8,6 +8,14 @@ sass_dir = "fahey-rodriguez4877-5079530/assets"
 images_dir = "fahey-rodriguez4877-5079530/assets"
 javascripts_dir = "fahey-rodriguez4877-5079530/assets"
 
+
+on_stylesheet_saved do |filename|
+  move_to = filename + ".liquid"
+  puts "Moving from #{filename} to #{move_to}"
+  FileUtils.mv(filename, move_to)
+end
+
+
 # You can select your preferred output style here (can be overridden via the command line):
 # output_style = :expanded or :nested or :compact or :compressed
 
